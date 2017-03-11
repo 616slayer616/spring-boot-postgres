@@ -1,0 +1,24 @@
+logging:
+    #file: /var/log/security.log
+    level.root: INFO
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springbootdb
+    username: java
+    password: java
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate.ddl-auto: create
+
+---
+
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:h2:mem:test;MODE=PostgreSQL
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate.ddl-auto: create

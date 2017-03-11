@@ -1,22 +1,23 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE")
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE'
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+
 
 group 'de.adler.springboot_hibernate'
 version '1.0-SNAPSHOT'
 
 jar {
-    baseName = 'gs-spring-boot'
+    baseName = 'spring-boot_hibernate_postgres'
     version = '0.1.0'
 }
 
@@ -43,6 +44,7 @@ dependencies {
 
     compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0.jre7'
 
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.193'
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("junit:junit")
 }
