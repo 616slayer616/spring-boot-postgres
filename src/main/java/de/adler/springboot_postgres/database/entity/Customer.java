@@ -5,10 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * @author adler
- * @version 01.03.2017
- */
 @Entity
 public class Customer {
 

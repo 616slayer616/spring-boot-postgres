@@ -9,10 +9,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-/**
- * @author adler
- * @version 01.03.2017
- */
 @SuppressWarnings("WeakerAccess")
 @SpringBootApplication
 @EnableAutoConfiguration

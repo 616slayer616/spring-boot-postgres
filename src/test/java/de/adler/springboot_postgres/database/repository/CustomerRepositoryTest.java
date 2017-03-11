@@ -13,10 +13,6 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 
-/**
- * @author adler
- * @version 11.03.2017
- */
 @SuppressWarnings("CanBeFinal")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest

@@ -7,10 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-/**
- * @author adler
- * @version 01.03.2017
- */
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
     List<Customer> findByLastName(String lastName);
