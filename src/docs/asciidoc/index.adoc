@@ -1,0 +1,100 @@
+= Helloworld API Guide
+Patrick Adler;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+
+[[overview]]
+= Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+Used HTTP verbs correspond to standard HTTP and REST conventions.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview-http-status-codes]]
+== HTTP status codes
+
+Status codes comply with standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+[[resources]]
+= Resources
+
+[[resources-root]]
+== Root
+
+The Root is for testing purposes.
+
+=== Root request
+
+A `GET` request to "" will retrieve the greeting message.
+
+==== Example request
+
+include::{snippets}/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/http-response.adoc[]
+
+[[resources-customer]]
+== Customer
+
+The Customer resource is used to retrieve, and update customers.
+
+=== Retrieve a customer
+
+A `GET` request to "customer/\{lastName\}" will return customers with the specified lastname.
+
+==== Response structure
+
+include::{snippets}/customer/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/customer/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customer/http-response.adoc[]

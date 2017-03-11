@@ -34,13 +34,10 @@ class HelloWorldController {
     @RequestMapping(value = "customer/{lastName}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<List<Customer>> customer(@PathVariable String lastName) {
         List<Customer> result = customers.findByLastName(lastName);
-        log.error(result);
 
-        ResponseEntity.BodyBuilder response = ResponseEntity.ok();
-        response.cacheControl(CacheControl.maxAge(1, TimeUnit.SECONDS));
-        response.body(result);
-
-        return response.build();
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(1, TimeUnit.SECONDS))
+                .body(result);
     }
 
 }
