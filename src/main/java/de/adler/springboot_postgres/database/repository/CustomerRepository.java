@@ -1,6 +1,6 @@
-package de.adler.springboot_hibernate.database.repository;
+package de.adler.springboot_postgres.database.repository;
 
-import de.adler.springboot_hibernate.database.entity.Customer;
+import de.adler.springboot_postgres.database.entity.Customer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

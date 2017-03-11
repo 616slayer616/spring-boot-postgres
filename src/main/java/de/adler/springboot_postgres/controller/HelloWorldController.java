@@ -1,8 +1,8 @@
-package de.adler.springboot_hibernate.controller;
+package de.adler.springboot_postgres.controller;
 
 
-import de.adler.springboot_hibernate.database.entity.Customer;
-import de.adler.springboot_hibernate.database.repository.CustomerRepository;
+import de.adler.springboot_postgres.database.entity.Customer;
+import de.adler.springboot_postgres.database.repository.CustomerRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;

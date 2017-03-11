@@ -1,7 +1,7 @@
-package de.adler.springboot_hibernate;
+package de.adler.springboot_postgres;
 
-import de.adler.springboot_hibernate.database.entity.Customer;
-import de.adler.springboot_hibernate.database.repository.CustomerRepository;
+import de.adler.springboot_postgres.database.entity.Customer;
+import de.adler.springboot_postgres.database.repository.CustomerRepository;
 import org.apache.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
  * @author adler
  * @version 01.03.2017
  */
+@SuppressWarnings("WeakerAccess")
 @SpringBootApplication
 @EnableAutoConfiguration
 public class Application {

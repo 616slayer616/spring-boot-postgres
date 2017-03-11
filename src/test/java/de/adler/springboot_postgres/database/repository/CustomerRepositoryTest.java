@@ -1,6 +1,6 @@
-package de.adler.springboot_hibernate.database.repository;
+package de.adler.springboot_postgres.database.repository;
 
-import de.adler.springboot_hibernate.database.entity.Customer;
+import de.adler.springboot_postgres.database.entity.Customer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +17,13 @@ import static org.hamcrest.core.Is.is;
  * @author adler
  * @version 11.03.2017
  */
+@SuppressWarnings("CanBeFinal")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
 public class CustomerRepositoryTest {
 
+    @SuppressWarnings("WeakerAccess")
     @Autowired
     CustomerRepository repository;
 

@@ -1,6 +1,9 @@
-package de.adler.springboot_hibernate.database.entity;
+package de.adler.springboot_postgres.database.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author adler

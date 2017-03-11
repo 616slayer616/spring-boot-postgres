@@ -1,6 +1,6 @@
-package de.adler.springboot_hibernate.controller;
+package de.adler.springboot_postgres.controller;
 
-import de.adler.springboot_hibernate.database.repository.CustomerRepository;
+import de.adler.springboot_postgres.database.repository.CustomerRepository;
 import org.junit.Rule;
 import org.mockito.Mock;
 import org.springframework.restdocs.JUnitRestDocumentation;

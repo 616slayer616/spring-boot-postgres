@@ -1,9 +1,8 @@
-package de.adler.springboot_hibernate.controller;
+package de.adler.springboot_postgres.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.adler.springboot_hibernate.controller.HelloWorldController;
-import de.adler.springboot_hibernate.database.entity.Customer;
+import de.adler.springboot_postgres.database.entity.Customer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +19,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
@@ -89,7 +85,8 @@ public class HelloWorldControllerTest extends ControllerTest {
                 )).andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
-        List<Customer> resultList = new ObjectMapper().readValue(content, new TypeReference<List<Customer>>(){});
+        List<Customer> resultList = new ObjectMapper().readValue(content, new TypeReference<List<Customer>>() {
+        });
         Assert.assertThat(resultList.get(0), is(bauerRef));
 
         verify(customerRepositoryMock, times(1)).findByLastName(lastName);

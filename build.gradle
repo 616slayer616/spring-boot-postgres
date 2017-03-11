@@ -15,7 +15,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'org.asciidoctor.convert'
 
 
-group 'de.adler.springboot_hibernate'
+group 'de.adler.springboot_postgres'
 version '1.0-SNAPSHOT'
 
 ext {
@@ -27,8 +27,9 @@ test {
 }
 
 jar {
-    baseName = 'spring-boot_hibernate_postgres'
+    baseName = 'springboot_postgres'
     version = '0.1.0'
+    //noinspection GroovyAssignabilityCheck
     dependsOn asciidoctor
     from("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
@@ -47,7 +48,9 @@ repositories {
     mavenCentral()
 }
 
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.8
+//noinspection GroovyUnusedAssignment
 targetCompatibility = 1.8
 
 dependencies {
