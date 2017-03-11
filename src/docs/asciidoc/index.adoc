@@ -1,4 +1,4 @@
-= spring-boot-postgres API Guide
+= Helloworld API Guide
 Patrick Adler;
 :doctype: book
 :icons: font

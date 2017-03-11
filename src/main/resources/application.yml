@@ -1,5 +1,5 @@
 logging:
-    file: log
+    #file: /var/log/security.log
     level.root: INFO
 
 spring:
@@ -13,9 +13,6 @@ spring:
     hibernate.ddl-auto: create
 
 ---
-
-logging:
-    level.root: OFF
 
 spring:
   profiles: test
