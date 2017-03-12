@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -37,18 +38,18 @@ public class CustomerRepositoryTest {
         Assert.assertThat(bauerList, is(bauerListRef));
     }
 
-    @Test
+    @Test(expected = DataIntegrityViolationException.class)
     @DirtiesContext
     public void saveDuplicateTest() throws Exception {
         Customer jackBauer = new Customer("Jack", "Bauer");
         repository.save(jackBauer);
         try {
             repository.save(new Customer("Kim", "Bauer"));
+            Assert.fail("expecting DataIntegrityViolationException here");
         } catch (Exception e) {
-            // TODO: expect exception
+            List<Customer> bauerList = repository.findByLastName("Bauer");
+            Assert.assertThat(bauerList.get(0), is(jackBauer));
+            throw e;
         }
-
-        List<Customer> bauerList = repository.findByLastName("Bauer");
-        Assert.assertThat(bauerList.get(0), is(jackBauer));
     }
 }
