@@ -28,6 +28,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -142,6 +143,23 @@ public class HelloWorldControllerTest extends ControllerTest {
         Assert.assertThat(content, is(""));
 
         verify(customerRepositoryMock, times(1)).save(bauerRef);
+    }
+
+    @Test
+    public void deleteCustomerTest() throws Exception {
+        Customer bauerRef = new Customer("Jack", lastName);
+        ObjectMapper mapper = new ObjectMapper();
+        String bauerJSON = mapper.writeValueAsString(bauerRef);
+
+        MvcResult mvcResult = this.mockMvc.perform(delete(URL_CUSTOMER_REST)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bauerJSON))
+                .andExpect(status().isAccepted())
+                .andDo(document(URL_CUSTOMER))
+                .andReturn();
+
+        verify(customerRepositoryMock, times(1)).delete(bauerRef);
     }
 
 }

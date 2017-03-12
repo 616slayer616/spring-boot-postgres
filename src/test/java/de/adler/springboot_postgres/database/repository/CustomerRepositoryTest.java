@@ -37,4 +37,14 @@ public class CustomerRepositoryTest {
         Assert.assertThat(bauerList, is(bauerListRef));
     }
 
+    @Test
+    public void saveDuplicateTest() throws Exception {
+        // save a couple of customers
+        Customer jackBauer = new Customer("Jack", "Bauer");
+        repository.save(jackBauer);
+        repository.save(new Customer("Kim", "Bauer"));
+
+        List<Customer> bauerList = repository.findByLastName("Bauer");
+        Assert.assertThat(bauerList.get(0), is(jackBauer));
+    }
 }
