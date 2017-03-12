@@ -50,7 +50,8 @@ public class HelloWorldControllerTest extends ControllerTest {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders
                 .standaloneSetup(helloWorldController)
-                .apply(documentationConfiguration(this.restDocumentation))
+                .apply(documentationConfiguration(this.restDocumentation).uris()
+                        .withScheme("http").withHost("example.com").withPort(80))
                 .build();
     }
 
@@ -83,7 +84,7 @@ public class HelloWorldControllerTest extends ControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(document(URL_CUSTOMER,
+                .andDo(document(URL_CUSTOMER + "GET",
                         responseFields(fields)
                 )).andReturn();
 
@@ -111,7 +112,7 @@ public class HelloWorldControllerTest extends ControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(bauerJSON))
                 .andExpect(status().isCreated())
-                .andDo(document(URL_CUSTOMER,
+                .andDo(document(URL_CUSTOMER + "PUT",
                         responseFields(fields)
                 )).andReturn();
 
@@ -154,7 +155,7 @@ public class HelloWorldControllerTest extends ControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(bauerJSON))
                 .andExpect(status().isAccepted())
-                .andDo(document(URL_CUSTOMER))
+                .andDo(document(URL_CUSTOMER + "DELETE"))
                 .andReturn();
 
         verify(customerRepositoryMock, times(1)).delete(bauerRef);

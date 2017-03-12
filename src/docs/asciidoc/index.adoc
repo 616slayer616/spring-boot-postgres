@@ -85,16 +85,49 @@ The Customer resource is used to retrieve, and update customers.
 
 === Retrieve a customer
 
-A `GET` request to "customer/\{lastName\}" will return customers with the specified lastname.
+A `GET` request to "customer/\{lastName\}" will return customers with the specified last name.
 
 ==== Response structure
 
-include::{snippets}/customer/response-fields.adoc[]
+include::{snippets}/customerGET/response-fields.adoc[]
 
 ==== Example request
 
-include::{snippets}/customer/curl-request.adoc[]
+include::{snippets}/customerGET/curl-request.adoc[]
 
 ==== Example response
 
-include::{snippets}/customer/http-response.adoc[]
+include::{snippets}/customerGET/http-response.adoc[]
+
+=== Add a customer
+
+A `PUT` request to "customer" will add a customer specified in the request body.
+
+==== Response structure
+
+include::{snippets}/customerPUT/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/customerPUT/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customerPUT/http-response.adoc[]
+
+=== Delete a customer
+
+A `DELETE` request to "customer" will delete the customer specified in the request body.
+
+==== Response structure
+
+The response body will be empty.
+
+==== Example request
+
+include::{snippets}/customerDELETE/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customerDELETE/http-response.adoc[]
+

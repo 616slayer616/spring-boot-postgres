@@ -65,8 +65,8 @@ public class HelloWorldController {
 
     @ResponseBody
     @RequestMapping(value = "customer", method = RequestMethod.DELETE)
-    public ResponseEntity<Customer> deleteCustomer(@RequestBody Customer newCustomer) {
-        customers.delete(newCustomer);
+    public ResponseEntity<Customer> deleteCustomer(@RequestBody Customer customer) {
+        customers.delete(customer);
 
         return ResponseEntity.accepted()
                 .cacheControl(CacheControl.noCache()).body(null);
