@@ -8,13 +8,13 @@ import javax.persistence.Id;
 @Entity
 public class Customer {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
+    @Id
     private String lastName;
 
-    protected Customer() {
+    Customer() {
     }
 
     public Customer(String firstName, String lastName) {
@@ -40,6 +40,14 @@ public class Customer {
         if (id != null ? !id.equals(customer.id) : customer.id != null) return false;
         if (firstName != null ? !firstName.equals(customer.firstName) : customer.firstName != null) return false;
         return lastName != null ? lastName.equals(customer.lastName) : customer.lastName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        return result;
     }
 
     @Override

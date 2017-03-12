@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
+    Customer save(Customer entity);
+
+    void delete(Customer entity);
+
     List<Customer> findByLastName(String lastName);
 
     @Query("SELECT p FROM Customer p WHERE LOWER(p.lastName) = LOWER(:lastName)")
