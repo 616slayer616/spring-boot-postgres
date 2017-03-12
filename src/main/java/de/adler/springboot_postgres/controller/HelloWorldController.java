@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +49,10 @@ public class HelloWorldController {
 
         try {
             Customer result = customers.save(newCustomer);
-            return ResponseEntity.ok() // TODO: 201 created
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(newCustomer.getLastName()).toUri();
+            return ResponseEntity.created(location)
                     .cacheControl(CacheControl.noCache())
                     .body(result);
         } catch (JpaSystemException e) {

@@ -111,7 +111,7 @@ public class HelloWorldControllerTest extends ControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(bauerJSON))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andDo(document(URL_CUSTOMER,
                         responseFields(fields)
                 )).andReturn();
