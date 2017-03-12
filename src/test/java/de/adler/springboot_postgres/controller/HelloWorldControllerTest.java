@@ -11,8 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,9 +26,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -130,7 +128,7 @@ public class HelloWorldControllerTest extends ControllerTest {
         Customer bauerRef = new Customer("Jack", lastName);
         ObjectMapper mapper = new ObjectMapper();
         String bauerJSON = mapper.writeValueAsString(bauerRef);
-        when(customerRepositoryMock.save(bauerRef)).thenThrow(JpaSystemException.class);
+        when(customerRepositoryMock.save(bauerRef)).thenThrow(DataIntegrityViolationException.class);
 
         MvcResult mvcResult = this.mockMvc.perform(put(URL_CUSTOMER_REST)
                 .accept(MediaType.APPLICATION_JSON)

@@ -5,9 +5,9 @@ import de.adler.springboot_postgres.database.entity.Customer;
 import de.adler.springboot_postgres.database.repository.CustomerRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -55,7 +55,7 @@ public class HelloWorldController {
             return ResponseEntity.created(location)
                     .cacheControl(CacheControl.noCache())
                     .body(result);
-        } catch (JpaSystemException e) {
+        } catch (DataIntegrityViolationException e) { // TODO: JpaSystemException ???
             //e.printStackTrace();
         }
 

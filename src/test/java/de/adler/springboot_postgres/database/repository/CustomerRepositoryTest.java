@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -24,11 +25,10 @@ public class CustomerRepositoryTest {
     CustomerRepository repository;
 
     @Test
+    @DirtiesContext
     public void findByLastName_2Test() throws Exception {
-        // save a couple of customers
         repository.save(new Customer("Jack", "Bauer"));
         repository.save(new Customer("Chloe", "O'Brian"));
-        repository.save(new Customer("Kim", "Bauer"));
         repository.save(new Customer("David", "Palmer"));
         repository.save(new Customer("Michelle", "Dessler"));
 
@@ -38,11 +38,15 @@ public class CustomerRepositoryTest {
     }
 
     @Test
+    @DirtiesContext
     public void saveDuplicateTest() throws Exception {
-        // save a couple of customers
         Customer jackBauer = new Customer("Jack", "Bauer");
         repository.save(jackBauer);
-        repository.save(new Customer("Kim", "Bauer"));
+        try {
+            repository.save(new Customer("Kim", "Bauer"));
+        } catch (Exception e) {
+            // TODO: expect exception
+        }
 
         List<Customer> bauerList = repository.findByLastName("Bauer");
         Assert.assertThat(bauerList.get(0), is(jackBauer));
