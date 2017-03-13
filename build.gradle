@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE'
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
     }
 }
@@ -65,12 +65,13 @@ dependencies {
     // end::actuator[]
 
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
-
+    compile("org.springframework.boot:spring-boot-starter-security")
 
     compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0.jre7'
 
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.193'
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework.security:spring-security-test")
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.1.2.RELEASE'
     testCompile("junit:junit")
 }
