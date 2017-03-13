@@ -10,9 +10,12 @@ spring:
   scheduling:
     fixed: 600000       # Run a job every 10 minutes
     cron: "0 0 1 * * ?" # Run a job every day at 1 a.m.
+  security:
+    usersByUsernameQuery: SELECT email as username, password, enabled FROM users WHERE email=?
+    authoritiesByUsernameQuery: SELECT u.email as username, r.role as role FROM users u INNER JOIN user_role r ON(r.userid=u.userid) WHERE u.email=?
 logging:
     file: log
-    level.root: DEBUG
+    level.root: INFO
 server:
      port: 8080
 
