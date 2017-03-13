@@ -50,4 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery(rolesQuery)
                 .passwordEncoder(bCryptPasswordEncoder);
     }
+
+    // TODO: Role hierarchy
 }
