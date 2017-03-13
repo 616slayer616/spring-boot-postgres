@@ -9,7 +9,7 @@ spring:
     hibernate.ddl-auto: validate
 logging:
     file: log
-    level.root: INFO
+    level.root: DEBUG
 server:
      port: 8080
 
