@@ -12,7 +12,7 @@ spring:
     cron: "0 0 1 * * ?" # Run a job every day at 1 a.m.
 logging:
     file: log
-    level.root: INFO
+    level.root: DEBUG
 server:
      port: 8080
 
