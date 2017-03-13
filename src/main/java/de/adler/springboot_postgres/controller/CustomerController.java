@@ -2,7 +2,6 @@ package de.adler.springboot_postgres.controller;
 
 import de.adler.springboot_postgres.database.entity.Customer;
 import de.adler.springboot_postgres.database.repository.CustomerRepository;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.CacheControl;
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequestMapping("customer")
 @CrossOrigin()
-public class CustomerController {
+class CustomerController {
 
     @SuppressWarnings("CanBeFinal")
     @Autowired

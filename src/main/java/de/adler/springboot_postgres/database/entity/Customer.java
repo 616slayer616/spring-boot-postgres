@@ -2,13 +2,17 @@ package de.adler.springboot_postgres.database.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Customer")
 public class Customer {
 
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String firstName;
+
     @Column(unique = true)
     private String lastName;
 

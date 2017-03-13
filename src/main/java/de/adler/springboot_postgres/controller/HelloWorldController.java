@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequestMapping("/")
 @CrossOrigin()
-public class HelloWorldController {
+class HelloWorldController {
 
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET, headers = "Accept=application/json")

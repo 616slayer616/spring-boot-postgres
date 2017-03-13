@@ -15,6 +15,6 @@ public interface CustomerRepository extends Repository<Customer, Long> {
 
     List<Customer> findByLastName(String lastName);
 
-    @Query("SELECT p FROM Customer p WHERE LOWER(p.lastName) = LOWER(:lastName)")
+    @Query("SELECT c FROM Customer c WHERE LOWER(c.lastName) = LOWER(:lastName)")
     List<Customer> findByLastNameCaseInsensitive(@Param("lastName") String lastName);
 }
