@@ -71,7 +71,6 @@ dependencies {
 
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.193'
     testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.springframework.security:spring-security-test")
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.1.2.RELEASE'
     testCompile("junit:junit")
 }

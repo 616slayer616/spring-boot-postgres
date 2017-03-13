@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.security.PermitAll;
 import java.util.concurrent.TimeUnit;
 
 @Service
-@RequestMapping("/")
 @CrossOrigin()
+@RequestMapping(value = {"", "/", "/home"})
 class HelloWorldController {
 
+    @PermitAll
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity hello() {
