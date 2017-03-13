@@ -37,11 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 public class HelloWorldControllerTest extends ControllerTest {
 
-    private static final String lastName = "Bauer";
-
-    private static final String URL_CUSTOMER = "customer";
-    private static final String URL_CUSTOMER_REST = "/" + URL_CUSTOMER;
-
     @InjectMocks
     private HelloWorldController helloWorldController;
 
@@ -61,104 +56,10 @@ public class HelloWorldControllerTest extends ControllerTest {
                 .accept(MediaType.ALL)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(document(""
+                .andDo(document("root"
                 )).andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
         Assert.assertThat(content, is("Hallol"));
     }
-
-    @Test
-    public void getCustomersByLastNameTest() throws Exception {
-        Customer bauerRef = new Customer("Jack", lastName);
-        List<Customer> bauerList = new ArrayList<>();
-        bauerList.add(bauerRef);
-        when(customerRepositoryMock.findByLastName(lastName)).thenReturn(bauerList);
-
-        List<FieldDescriptor> fields = new ArrayList<>();
-        fields.add(fieldWithPath("[]").description("List of users with specified last name."));
-        fields.add(fieldWithPath("[].firstName").description("First name"));
-        fields.add(fieldWithPath("[].lastName").description("Last name"));
-
-        MvcResult mvcResult = this.mockMvc.perform(get(URL_CUSTOMER_REST + "/" + lastName)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(document(URL_CUSTOMER + "GET",
-                        responseFields(fields)
-                )).andReturn();
-
-        String content = mvcResult.getResponse().getContentAsString();
-        List<Customer> resultList = new ObjectMapper().readValue(content, new TypeReference<List<Customer>>() {
-        });
-        Assert.assertThat(resultList.get(0), is(bauerRef));
-
-        verify(customerRepositoryMock, times(1)).findByLastName(lastName);
-    }
-
-    @Test
-    public void saveCustomerTest() throws Exception {
-        Customer bauerRef = new Customer("Jack", lastName);
-        ObjectMapper mapper = new ObjectMapper();
-        String bauerJSON = mapper.writeValueAsString(bauerRef);
-        when(customerRepositoryMock.save(bauerRef)).thenReturn(bauerRef);
-
-        List<FieldDescriptor> fields = new ArrayList<>();
-        fields.add(fieldWithPath("firstName").description("First name"));
-        fields.add(fieldWithPath("lastName").description("Last name"));
-
-        MvcResult mvcResult = this.mockMvc.perform(put(URL_CUSTOMER_REST)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(bauerJSON))
-                .andExpect(status().isCreated())
-                .andDo(document(URL_CUSTOMER + "PUT",
-                        responseFields(fields)
-                )).andReturn();
-
-        String content = mvcResult.getResponse().getContentAsString();
-        Customer result = new ObjectMapper().readValue(content, new TypeReference<Customer>() {
-        });
-        Assert.assertThat(result, is(bauerRef));
-
-        verify(customerRepositoryMock, times(1)).save(bauerRef);
-    }
-
-    @Test
-    public void saveCustomerDuplicateTest() throws Exception {
-        Customer bauerRef = new Customer("Jack", lastName);
-        ObjectMapper mapper = new ObjectMapper();
-        String bauerJSON = mapper.writeValueAsString(bauerRef);
-        when(customerRepositoryMock.save(bauerRef)).thenThrow(DataIntegrityViolationException.class);
-
-        MvcResult mvcResult = this.mockMvc.perform(put(URL_CUSTOMER_REST)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(bauerJSON))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        String content = mvcResult.getResponse().getContentAsString();
-        Assert.assertThat(content, is(""));
-
-        verify(customerRepositoryMock, times(1)).save(bauerRef);
-    }
-
-    @Test
-    public void deleteCustomerTest() throws Exception {
-        Customer bauerRef = new Customer("Jack", lastName);
-        ObjectMapper mapper = new ObjectMapper();
-        String bauerJSON = mapper.writeValueAsString(bauerRef);
-
-        MvcResult mvcResult = this.mockMvc.perform(delete(URL_CUSTOMER_REST)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(bauerJSON))
-                .andExpect(status().isAccepted())
-                .andDo(document(URL_CUSTOMER + "DELETE"))
-                .andReturn();
-
-        verify(customerRepositoryMock, times(1)).delete(bauerRef);
-    }
-
 }

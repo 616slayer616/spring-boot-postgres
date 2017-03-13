@@ -72,11 +72,11 @@ A `GET` request to "" will retrieve the greeting message.
 
 ==== Example request
 
-include::{snippets}/curl-request.adoc[]
+include::{snippets}/root/curl-request.adoc[]
 
 ==== Example response
 
-include::{snippets}/http-response.adoc[]
+include::{snippets}/root/http-response.adoc[]
 
 [[resources-customer]]
 == Customer
