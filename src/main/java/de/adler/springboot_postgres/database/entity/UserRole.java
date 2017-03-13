@@ -10,6 +10,7 @@ public class UserRole {
     @Column(name = "user_role_id")
     private Long userroleid;
 
+    // TODO: composite key userid & role
     @Column(name = "userid")
     private Long userid;
 
