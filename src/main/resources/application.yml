@@ -38,6 +38,6 @@ spring:
     cron: "30 * * * * ?"  # Run a job every 30th second
 logging:
     file:
-    level.root: INFO
+    level.root: OFF
 server:
      port: 8080
