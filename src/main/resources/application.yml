@@ -6,12 +6,25 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: validate
 logging:
     file: log
     level.root: INFO
 server:
      port: 8080
+
+---
+
+spring:
+  profiles: setup
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springbootdb
+    username: java
+    password: java
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate.ddl-auto: create
 
 ---
 

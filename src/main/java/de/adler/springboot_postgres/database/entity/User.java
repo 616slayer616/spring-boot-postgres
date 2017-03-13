@@ -2,15 +2,13 @@ package de.adler.springboot_postgres.database.entity;
 
 import javax.persistence.*;
 
-
 @Entity
+@Table(name = "users") // user is a reserved keyword in postgreSQL
 public class User {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @Column(name = "username")
@@ -19,7 +17,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "enabled")
@@ -29,12 +27,11 @@ public class User {
 
     }
 
-    public User(User user) {
-        this.userId = user.userId;
-        this.username = user.username;
-        this.email = user.email;
-        this.password = user.password;
-        this.enabled = user.enabled;
+    public User(String username, String password, String email, boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.enabled = enabled;
     }
 
     public boolean getEnabled() {
