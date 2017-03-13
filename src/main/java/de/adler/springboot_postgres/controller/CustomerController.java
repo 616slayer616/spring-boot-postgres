@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 @CrossOrigin()
 @RequestMapping("customer")
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 class CustomerController {
 
     @SuppressWarnings("CanBeFinal")
