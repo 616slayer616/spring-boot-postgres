@@ -6,7 +6,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
-    hibernate.ddl-auto: validate
+    hibernate.ddl-auto: create
 logging:
     file: log
     level.root: INFO
