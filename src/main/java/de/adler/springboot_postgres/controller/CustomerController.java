@@ -40,7 +40,6 @@ class CustomerController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public ResponseEntity<Customer> saveCustomer(@RequestBody Customer newCustomer) {
-
         try {
             Customer result = customers.save(newCustomer);
             URI location = ServletUriComponentsBuilder

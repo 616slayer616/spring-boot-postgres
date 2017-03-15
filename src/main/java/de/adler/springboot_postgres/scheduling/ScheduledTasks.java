@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Component
 @EnableScheduling
-public class ScheduledTasks {
+class ScheduledTasks {
 
     private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
