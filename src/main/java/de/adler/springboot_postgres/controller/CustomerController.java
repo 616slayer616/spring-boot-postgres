@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -28,8 +27,8 @@ class CustomerController {
     @ResponseBody
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "{lastName}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public ResponseEntity<List<Customer>> getCustomersByLastName(@PathVariable String lastName) {
-        List<Customer> result = customers.findByLastName(lastName);
+    public ResponseEntity<Customer> getCustomersByLastName(@PathVariable String lastName) {
+        Customer result = customers.findByLastName(lastName);
 
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(1, TimeUnit.SECONDS))

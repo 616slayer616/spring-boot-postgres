@@ -3,6 +3,10 @@ package de.adler.springboot_postgres.database.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(
+        uniqueConstraints =
+        @UniqueConstraint(columnNames = {"userid", "role"})
+)
 public class UserRole {
 
     @Id
@@ -10,9 +14,8 @@ public class UserRole {
     @Column(name = "user_role_id")
     private Long userroleid;
 
-    // TODO: composite key userid & role
     @Column(name = "userid")
-    private Long userid;
+    private Long userId;
 
     @Column(name = "role")
     private String role;
@@ -20,8 +23,8 @@ public class UserRole {
     UserRole() {
     }
 
-    public UserRole(Long userid, String role) {
-        this.userid = userid;
+    public UserRole(Long userId, String role) {
+        this.userId = userId;
         this.role = role;
     }
 
@@ -33,12 +36,12 @@ public class UserRole {
         this.role = role;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getUserroleid() {
@@ -57,14 +60,14 @@ public class UserRole {
         UserRole userRole = (UserRole) o;
 
         if (userroleid != null ? !userroleid.equals(userRole.userroleid) : userRole.userroleid != null) return false;
-        if (userid != null ? !userid.equals(userRole.userid) : userRole.userid != null) return false;
+        if (userId != null ? !userId.equals(userRole.userId) : userRole.userId != null) return false;
         return role != null ? role.equals(userRole.role) : userRole.role == null;
     }
 
     @Override
     public int hashCode() {
         int result = userroleid != null ? userroleid.hashCode() : 0;
-        result = 31 * result + (userid != null ? userid.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }

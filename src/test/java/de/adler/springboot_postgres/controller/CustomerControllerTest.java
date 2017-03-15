@@ -58,14 +58,11 @@ public class CustomerControllerTest extends ControllerTest {
     @Test
     public void getCustomersByLastNameTest() throws Exception {
         Customer bauerRef = new Customer("Jack", lastName);
-        List<Customer> bauerList = new ArrayList<>();
-        bauerList.add(bauerRef);
-        when(customerRepositoryMock.findByLastName(lastName)).thenReturn(bauerList);
+        when(customerRepositoryMock.findByLastName(lastName)).thenReturn(bauerRef);
 
         List<FieldDescriptor> fields = new ArrayList<>();
-        fields.add(fieldWithPath("[]").description("List of users with specified last name."));
-        fields.add(fieldWithPath("[].firstName").description("First name"));
-        fields.add(fieldWithPath("[].lastName").description("Last name"));
+        fields.add(fieldWithPath("firstName").description("First name"));
+        fields.add(fieldWithPath("lastName").description("Last name"));
 
         MvcResult mvcResult = this.mockMvc.perform(get(URL_CUSTOMER_REST + "/" + lastName)
                 .accept(MediaType.APPLICATION_JSON)
@@ -76,9 +73,9 @@ public class CustomerControllerTest extends ControllerTest {
                 )).andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
-        List<Customer> resultList = new ObjectMapper().readValue(content, new TypeReference<List<Customer>>() {
+        Customer result = new ObjectMapper().readValue(content, new TypeReference<Customer>() {
         });
-        Assert.assertThat(resultList.get(0), is(bauerRef));
+        Assert.assertThat(result, is(bauerRef));
 
         verify(customerRepositoryMock, times(1)).findByLastName(lastName);
     }

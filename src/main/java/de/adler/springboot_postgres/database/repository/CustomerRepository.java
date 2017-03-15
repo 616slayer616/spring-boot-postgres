@@ -5,16 +5,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
 public interface CustomerRepository extends Repository<Customer, Long> {
 
     Customer save(Customer entity);
 
     void delete(Customer entity);
 
-    List<Customer> findByLastName(String lastName);
+    Customer findByLastName(String lastName);
 
     @Query("SELECT c FROM Customer c WHERE LOWER(c.lastName) = LOWER(:lastName)")
-    List<Customer> findByLastNameCaseInsensitive(@Param("lastName") String lastName);
+    Customer findByLastNameCaseInsensitive(@Param("lastName") String lastName);
 }

@@ -11,8 +11,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 
 @SuppressWarnings("CanBeFinal")
@@ -33,9 +31,9 @@ public class CustomerRepositoryTest {
         repository.save(new Customer("David", "Palmer"));
         repository.save(new Customer("Michelle", "Dessler"));
 
-        List<Customer> bauerListRef = repository.findByLastName("Bauer");
-        List<Customer> bauerList = repository.findByLastNameCaseInsensitive("Bauer");
-        Assert.assertThat(bauerList, is(bauerListRef));
+        Customer bauerRef = repository.findByLastName("Bauer");
+        Customer bauer = repository.findByLastNameCaseInsensitive("Bauer");
+        Assert.assertThat(bauer, is(bauerRef));
     }
 
     @Test(expected = DataIntegrityViolationException.class)
@@ -47,8 +45,8 @@ public class CustomerRepositoryTest {
             repository.save(new Customer("Kim", "Bauer"));
             Assert.fail("expecting DataIntegrityViolationException here");
         } catch (Exception e) {
-            List<Customer> bauerList = repository.findByLastName("Bauer");
-            Assert.assertThat(bauerList.get(0), is(jackBauer));
+            Customer bauer = repository.findByLastName("Bauer");
+            Assert.assertThat(bauer, is(jackBauer));
             throw e;
         }
     }
