@@ -33,16 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers(",", "/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
-                /*.formLogin();
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();*/
     }
 
     @Autowired
@@ -50,11 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.
                 jdbcAuthentication()
+                .rolePrefix("ROLE_")
                 .dataSource(dataSource)
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
                 .passwordEncoder(bCryptPasswordEncoder);
     }
-
-    // TODO: Role hierarchy
 }
