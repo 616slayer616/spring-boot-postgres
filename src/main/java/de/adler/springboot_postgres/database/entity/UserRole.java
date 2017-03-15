@@ -49,4 +49,23 @@ public class UserRole {
         this.userroleid = userroleid;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserRole userRole = (UserRole) o;
+
+        if (userroleid != null ? !userroleid.equals(userRole.userroleid) : userRole.userroleid != null) return false;
+        if (userid != null ? !userid.equals(userRole.userid) : userRole.userid != null) return false;
+        return role != null ? role.equals(userRole.role) : userRole.role == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userroleid != null ? userroleid.hashCode() : 0;
+        result = 31 * result + (userid != null ? userid.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
+    }
 }

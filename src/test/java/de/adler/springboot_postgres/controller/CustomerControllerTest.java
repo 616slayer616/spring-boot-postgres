@@ -116,7 +116,8 @@ public class CustomerControllerTest extends ControllerTest {
         Customer bauerRef = new Customer("Jack", lastName);
         ObjectMapper mapper = new ObjectMapper();
         String bauerJSON = mapper.writeValueAsString(bauerRef);
-        when(customerRepositoryMock.save(bauerRef)).thenThrow(DataIntegrityViolationException.class);
+        doThrow(new DataIntegrityViolationException("")).when(customerRepositoryMock).save(bauerRef);
+
 
         MvcResult mvcResult = this.mockMvc.perform(put(URL_CUSTOMER_REST)
                 .accept(MediaType.APPLICATION_JSON)

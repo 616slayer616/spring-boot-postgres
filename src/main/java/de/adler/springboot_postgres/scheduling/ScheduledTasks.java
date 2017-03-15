@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Component
 @EnableScheduling
-public class ScheduledTasks {
+class ScheduledTasks {
 
     private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
@@ -22,8 +22,8 @@ public class ScheduledTasks {
     /**
      * This bean retrieves the cron expression form the configuration
      *
-     * @param cronValue
-     * @return
+     * @param cronValue String from config
+     * @return Cron expression
      */
     @Bean
     public String cronBean(@Value("${spring.scheduling.cron}") String cronValue) {

@@ -19,15 +19,19 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @SuppressWarnings("CanBeFinal")
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @SuppressWarnings("CanBeFinal")
     @Autowired
     private DataSource dataSource;
 
+    @SuppressWarnings("CanBeFinal")
     @Value("${spring.security.usersByUsernameQuery}")
     private String usersQuery;
 
+    @SuppressWarnings("CanBeFinal")
     @Value("${spring.security.authoritiesByUsernameQuery}")
     private String rolesQuery;
 

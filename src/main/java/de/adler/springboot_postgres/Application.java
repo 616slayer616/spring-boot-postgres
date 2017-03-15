@@ -29,7 +29,7 @@ public class Application {
     }
 
     @Bean
-    @Profile("setup")
+    @Profile({"setup", "test"})
     public CommandLineRunner demo(UserRepository userRepo, UserRoleRepository roleRepo) {
         return (args) -> {
             User savedUser = userRepo.save(new User("user", bCryptPasswordEncoder.encode("password"), "email1", true));
@@ -41,7 +41,6 @@ public class Application {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 }
