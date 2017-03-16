@@ -59,9 +59,7 @@ public class UserRole {
 
         UserRole userRole = (UserRole) o;
 
-        if (userroleid != null ? !userroleid.equals(userRole.userroleid) : userRole.userroleid != null) return false;
-        if (userId != null ? !userId.equals(userRole.userId) : userRole.userId != null) return false;
-        return role != null ? role.equals(userRole.role) : userRole.role == null;
+        return (userroleid != null ? userroleid.equals(userRole.userroleid) : userRole.userroleid == null) && (userId != null ? userId.equals(userRole.userId) : userRole.userId == null) && (role != null ? role.equals(userRole.role) : userRole.role == null);
     }
 
     @Override

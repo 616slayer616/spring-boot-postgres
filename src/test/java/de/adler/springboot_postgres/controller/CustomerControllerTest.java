@@ -57,8 +57,8 @@ public class CustomerControllerTest extends ControllerTest {
 
     @Test
     public void getCustomersByLastNameTest() throws Exception {
-        Customer bauerRef = new Customer("Jack", lastName);
-        when(customerRepositoryMock.findByLastName(lastName)).thenReturn(bauerRef);
+        Customer customerRef = new Customer("Jack", lastName);
+        when(customerRepositoryMock.findByLastName(lastName)).thenReturn(customerRef);
 
         List<FieldDescriptor> fields = new ArrayList<>();
         fields.add(fieldWithPath("firstName").description("First name"));
@@ -75,17 +75,17 @@ public class CustomerControllerTest extends ControllerTest {
         String content = mvcResult.getResponse().getContentAsString();
         Customer result = new ObjectMapper().readValue(content, new TypeReference<Customer>() {
         });
-        Assert.assertThat(result, is(bauerRef));
+        Assert.assertThat(result, is(customerRef));
 
         verify(customerRepositoryMock, times(1)).findByLastName(lastName);
     }
 
     @Test
     public void saveCustomerTest() throws Exception {
-        Customer bauerRef = new Customer("Jack", lastName);
+        Customer customerRef = new Customer("Jack", lastName);
         ObjectMapper mapper = new ObjectMapper();
-        String bauerJSON = mapper.writeValueAsString(bauerRef);
-        when(customerRepositoryMock.save(bauerRef)).thenReturn(bauerRef);
+        String bauerJSON = mapper.writeValueAsString(customerRef);
+        when(customerRepositoryMock.save(customerRef)).thenReturn(customerRef);
 
         List<FieldDescriptor> fields = new ArrayList<>();
         fields.add(fieldWithPath("firstName").description("First name"));
@@ -103,17 +103,17 @@ public class CustomerControllerTest extends ControllerTest {
         String content = mvcResult.getResponse().getContentAsString();
         Customer result = new ObjectMapper().readValue(content, new TypeReference<Customer>() {
         });
-        Assert.assertThat(result, is(bauerRef));
+        Assert.assertThat(result, is(customerRef));
 
-        verify(customerRepositoryMock, times(1)).save(bauerRef);
+        verify(customerRepositoryMock, times(1)).save(customerRef);
     }
 
     @Test
     public void saveCustomerDuplicateTest() throws Exception {
-        Customer bauerRef = new Customer("Jack", lastName);
+        Customer customerRef = new Customer("Jack", lastName);
         ObjectMapper mapper = new ObjectMapper();
-        String bauerJSON = mapper.writeValueAsString(bauerRef);
-        doThrow(new DataIntegrityViolationException("")).when(customerRepositoryMock).save(bauerRef);
+        String bauerJSON = mapper.writeValueAsString(customerRef);
+        doThrow(new DataIntegrityViolationException("")).when(customerRepositoryMock).save(customerRef);
 
 
         MvcResult mvcResult = this.mockMvc.perform(put(URL_CUSTOMER_REST)
@@ -126,7 +126,7 @@ public class CustomerControllerTest extends ControllerTest {
         String content = mvcResult.getResponse().getContentAsString();
         Assert.assertThat(content, is(""));
 
-        verify(customerRepositoryMock, times(1)).save(bauerRef);
+        verify(customerRepositoryMock, times(1)).save(customerRef);
     }
 
     @Test

@@ -10,8 +10,6 @@ public abstract class ControllerTest {
 
     MockMvc mockMvc;
 
-    static final String passKey = "abc1234";
-
     @Mock
     CustomerRepository customerRepositoryMock;
 
