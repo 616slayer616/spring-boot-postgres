@@ -10,7 +10,7 @@ Spring security with JDBC authentication is used to secure the Controllers.
 
 ## Requirements
 
-PostgreSQL
+PostgreSQL,  
 JDK 7 or higher
 
 ## Building
@@ -42,10 +42,15 @@ At first the PostgreSQL database has to be created manually
       ----
 
 ### Normal operation
+#### Start
 
 ----
 	$ java -jar build/libs/springboot_postgres-1.0.jar
 ----
+
+#### Usage
+
+Go to  [http://localhost:8080](http://localhost:8080) to start.
 
 ### Documentation
 
