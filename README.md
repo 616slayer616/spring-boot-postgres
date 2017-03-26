@@ -25,7 +25,7 @@ JDK 7 or higher
 At first the PostgreSQL database has to be created manually
 
 1. Setup PostgreSQL
-    * Create a database user 
+    * Create a database user named java and use java as password
     
         ----
           $ sudo -u postgres createuser -P -d java

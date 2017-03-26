@@ -37,8 +37,8 @@ public class Application {
     @Profile({"setup", "test"})
     public class UserSetup implements CommandLineRunner {
 
-        UserRepository userRepo;
-        UserRoleRepository roleRepo;
+        final UserRepository userRepo;
+        final UserRoleRepository roleRepo;
 
         public UserSetup(UserRepository userRepo, UserRoleRepository roleRepo) {
             this.userRepo = userRepo;
