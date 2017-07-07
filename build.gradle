@@ -65,7 +65,6 @@ dependencies {
     // end::actuator[]
 
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.springframework.boot:spring-boot-starter-security")
 
     compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'
 

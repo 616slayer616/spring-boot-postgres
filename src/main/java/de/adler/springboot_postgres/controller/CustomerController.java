@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 @CrossOrigin()
 @RequestMapping("customer")
-@PreAuthorize("isAuthenticated()")
 class CustomerController {
 
     @SuppressWarnings("CanBeFinal")
@@ -25,7 +23,6 @@ class CustomerController {
     private CustomerRepository customers;
 
     @ResponseBody
-    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "{lastName}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<Customer> getCustomersByLastName(@PathVariable String lastName) {
         Customer result = customers.findByLastName(lastName);
@@ -36,7 +33,6 @@ class CustomerController {
     }
 
     @ResponseBody
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public ResponseEntity<Customer> saveCustomer(@RequestBody Customer newCustomer) {
         try {
@@ -56,7 +52,6 @@ class CustomerController {
     }
 
     @ResponseBody
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "", method = RequestMethod.DELETE)
     public ResponseEntity<Customer> deleteCustomer(@RequestBody Customer customer) {
         customers.delete(customer);
